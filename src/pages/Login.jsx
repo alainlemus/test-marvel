@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { client } from "../supabase/client"
 import logo from "../assets/logo.webp"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 
 export default function Login(){
 
@@ -39,9 +41,11 @@ export default function Login(){
                     </div>
                     <div className="input-line"> 
                         <input name="email" className="input" type="email" id="email" placeholder="Correo electrónico" onChange={(e) => setEmail(e.target.value) }/>
+                        <FontAwesomeIcon icon={faEnvelope} className="mail"/>
                     </div>
                     <div className="input-line">
                         <input name="password" className="input" type="password" id="password" placeholder="Contraseña" onChange={(e) => setPassword(e.target.value) }/>
+                        <FontAwesomeIcon icon={faLock} className="pass"/>
                     </div>
                     <div className="block-button">
                         <input className="button" type="submit" value="Ingresar" />

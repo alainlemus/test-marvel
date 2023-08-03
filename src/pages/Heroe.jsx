@@ -21,8 +21,8 @@ export default function Heroe(){
                         <img className="image-heroe" src={selected.src} alt={selected.heroName} />
                     </div>
                     <div className="container-info">
-                        <p className="title">{selected.heroName}</p>
-                        <p className="subtitle">{selected.description}</p>
+                        <p className="title padding">{selected.heroName}</p>
+                        {selected.description == '' ? <p className="no-description">Sin descripción</p> : <p className="subtitle">{selected.description}</p>}
                     </div>
                 </div>
 

@@ -1,6 +1,8 @@
 import { useRef } from 'react'
 import logo from '../assets/logo.webp'
 import { client } from '../supabase/client'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 export default function Menu(){
 
@@ -44,11 +46,11 @@ export default function Menu(){
             </div>
 
             <div className='logout-desktop' onClick={ () => client.auth.signOut() }>
-                Salir
+                <FontAwesomeIcon icon={faRightFromBracket} /> Salir
             </div>
 
             <div className='menu-opciones-movil close' id="menu-opciones-movil">
-                <div className='logout-movil' onClick={ () => client.auth.signOut() }>Salir</div>
+                <div className='logout-movil' onClick={ () => client.auth.signOut() }><FontAwesomeIcon icon={faRightFromBracket} /> Salir</div>
             </div>
             
         </nav>
