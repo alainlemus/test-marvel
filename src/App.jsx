@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from 'react'
+import {
+  Route,
+  Routes,
+  useNavigate
+} from "react-router-dom"
+
+import Login from './pages/Login'
+import Home from './pages/Home'
+import NotFound from './pages/NotFound'
+
+import { client } from './supabase/client'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    console.log('App.js')
+    client.auth.onAuthStateChange((event, session) => {
+      if(!session){
+        navigate('/')
+      }else{
+        navigate('/home')
+      }
+    })
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className='text-sm text-blue'>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p className='text-2xl'>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-        <h1 className="text-3xl font-bold underline text-center">Hello world!</h1> 
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home/*" element={<NotFound />} />
+      </Routes>
+    
+    
+    
   )
 }
 
