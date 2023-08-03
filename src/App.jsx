@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import DataProvider from './context/DataContext'
 import {
   Route,
   Routes,
@@ -8,15 +9,17 @@ import {
 import Login from './pages/Login'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
+import Heroe from './pages/Heroe'
 
 import { client } from './supabase/client'
+
 
 function App() {
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log('App.js')
+    
     client.auth.onAuthStateChange((event, session) => {
       if(!session){
         navigate('/')
@@ -27,12 +30,16 @@ function App() {
   }, [])
 
   return (
-    
+
+    <DataProvider>
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Login />} />
-        <Route path="/home/*" element={<NotFound />} />
+        <Route path="/home/:id" element={<Heroe />} />
+        <Route path="/home/:id/*" element={<NotFound />} />
       </Routes>
+    </DataProvider>
+    
     
     
     
